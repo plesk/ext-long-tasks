@@ -11,6 +11,7 @@ class Modules_LongTasksExample_Task_Succeed extends pm_LongTask_Task
         pm_Log::info('Start method Run for Succeed.');
         pm_Log::info('p2 is '.$this->getParam('p2'));
         pm_Log::info('p3 is '.$this->getParam('p3'));
+        pm_Log::info('domain name is '. $this->getParam('domainName', 'none'));
         $this->updateProgress(0);
         pm_Log::info(self::$progressText.$this->getProgress());
         sleep(3);

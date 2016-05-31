@@ -8,6 +8,7 @@ class Modules_LongTasksExample_Task_Fail extends pm_LongTask_Task
     public function run()
     {
         pm_Log::info('Start method Run for Fail.');
+        pm_Log::info('domain name is '. $this->getParam('domainName', 'none'));
         sleep(2);
         $this->updateProgress(30);
         sleep(2);

@@ -28,10 +28,11 @@ class IndexController extends pm_Controller_Action
         $domainSelector[-1] = 'Global';
         if ($list->status = 'ok') {
             foreach ($list as $domain) {
-                $domainSelector[intval($domain->id)] = strval($domain->data->gen_info->name);
+                if(isset($domain->data->gen_info->name)) {
+                    $domainSelector[intval($domain->id)] = strval($domain->data->gen_info->name);
+                }
             }
         }
-
         $form = new Modules_LongTasksExample_Form_CreateForm();
         $form->addElement('select', 'exampleSelect', [
             'label' => 'Select domain',
@@ -103,6 +104,9 @@ class IndexController extends pm_Controller_Action
         ]);
         $task->setParam('p3', 3);
 
+        if(isset($domain)){
+            $task->setParam('domainName', $domain->getName());
+        }
         $this->taskManager->start($task, $domain);
 
         if($domain){
