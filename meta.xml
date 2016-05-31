@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+  <id>long-tasks-example</id>
+  <name>Long Tasks Example</name>
+  <description>Demonstrates how long tasks work.</description>
+  <version>1.0</version>
+  <release>1</release>
+  <vendor>Plesk</vendor>
+  <plesk_min_version>17.0</plesk_min_version>
+</module>
