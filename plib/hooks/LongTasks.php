@@ -6,9 +6,8 @@ class Modules_LongTasksExample_LongTasks extends pm_Hook_LongTasks
     {
         pm_Log::info('getLongTasks.');
         return [new Modules_LongTasksExample_Task_Succeed(),
-                new Modules_LongTasksExample_Task_Fail(),
+            new Modules_LongTasksExample_Task_Fail(),
         ];
     }
 }
-
 

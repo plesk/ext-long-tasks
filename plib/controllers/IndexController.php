@@ -28,7 +28,7 @@ class IndexController extends pm_Controller_Action
         $domainSelector[-1] = 'Global';
         if ($list->status = 'ok') {
             foreach ($list as $domain) {
-                if(isset($domain->data->gen_info->name)) {
+                if (isset($domain->data->gen_info->name)) {
                     $domainSelector[intval($domain->id)] = strval($domain->data->gen_info->name);
                 }
             }
@@ -65,24 +65,24 @@ class IndexController extends pm_Controller_Action
         pm_Log::info('Try get succeed tasks');
         $tasks = $this->taskManager->getTasks(['task_succeed']);
         $countDone = 0;
-        foreach($tasks as $task){
-            if($task->getStatus() == pm_LongTask_Task::STATUS_DONE){
+        foreach ($tasks as $task) {
+            if ($task->getStatus() == pm_LongTask_Task::STATUS_DONE) {
                 $countDone++;
             }
         }
         $form->addElement('SimpleText', 'text', [
-            'value' => 'Count of global succeed tasks: '.count($tasks). ' Done task: '.$countDone,
+            'value' => 'Count of global succeed tasks: ' . count($tasks) . ' Done task: ' . $countDone,
         ]);
         pm_Log::info('Try get failed tasks');
         $tasks = $this->taskManager->getTasks(['task_fail']);
         $countDone = 0;
-        foreach($tasks as $task){
-            if($task->getStatus() == pm_LongTask_Task::STATUS_ERROR){
+        foreach ($tasks as $task) {
+            if ($task->getStatus() == pm_LongTask_Task::STATUS_ERROR) {
                 $countDone++;
             }
         }
         $form->addElement('SimpleText', 'newtext', [
-            'value' => 'Count of global failed tasks: '.count($tasks),
+            'value' => 'Count of global failed tasks: ' . count($tasks),
         ]);
 
         $this->view->form = $form;
@@ -104,14 +104,14 @@ class IndexController extends pm_Controller_Action
         ]);
         $task->setParam('p3', 3);
 
-        if(isset($domain)){
+        if (isset($domain)) {
             $task->setParam('domainName', $domain->getName());
         }
         $this->taskManager->start($task, $domain);
 
-        if($domain){
+        if ($domain) {
             $this->_redirect('/admin/subscription/overview/id/' . $domain->getId(), ['prependBase' => false]);
-        }else{
+        } else {
             $this->_redirect('index/form');
         }
     }
@@ -120,9 +120,9 @@ class IndexController extends pm_Controller_Action
     {
         pm_Log::info('Try get tasks');
         $tasks = $this->taskManager->getTasks(['task_succeed']);
-        $i = count($tasks)-1;
-        while($i >= 0){
-            if($tasks[$i]->getStatus() != pm_LongTask_Task::STATUS_DONE){
+        $i = count($tasks) - 1;
+        while ($i >= 0) {
+            if ($tasks[$i]->getStatus() != pm_LongTask_Task::STATUS_DONE) {
                 $this->taskManager->cancel($tasks[$i]);
                 break;
             }
@@ -135,8 +135,8 @@ class IndexController extends pm_Controller_Action
     {
         pm_Log::info('Try get tasks');
         $tasks = $this->taskManager->getTasks(['task_succeed']);
-        $i = count($tasks)-1;
-        while($i >= 0){
+        $i = count($tasks) - 1;
+        while ($i >= 0) {
             $this->taskManager->cancel($tasks[$i]);
             $i--;
         }
@@ -151,7 +151,7 @@ class IndexController extends pm_Controller_Action
 
     public function getDomainInfo()
     {
-     $requestGet = <<<APICALL
+        $requestGet = <<<APICALL
 
         <webspace>
            <get>
@@ -168,3 +168,4 @@ APICALL;
         return $responseGet;
     }
 }
+

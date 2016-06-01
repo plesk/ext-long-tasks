@@ -9,27 +9,27 @@ class Modules_LongTasksExample_Task_Succeed extends pm_LongTask_Task
     public function run()
     {
         pm_Log::info('Start method Run for Succeed.');
-        pm_Log::info('p2 is '.$this->getParam('p2'));
-        pm_Log::info('p3 is '.$this->getParam('p3'));
-        pm_Log::info('domain name is '. $this->getParam('domainName', 'none'));
+        pm_Log::info('p2 is ' . $this->getParam('p2'));
+        pm_Log::info('p3 is ' . $this->getParam('p3'));
+        pm_Log::info('domain name is ' . $this->getParam('domainName', 'none'));
         $this->updateProgress(0);
-        pm_Log::info(self::$progressText.$this->getProgress());
+        pm_Log::info(self::$progressText . $this->getProgress());
         sleep(3);
         $this->updateProgress(20);
-        pm_Log::info(self::$progressText.$this->getProgress());
+        pm_Log::info(self::$progressText . $this->getProgress());
         sleep(3);
         $this->updateProgress(40);
-        pm_Log::info(self::$progressText.$this->getProgress());
+        pm_Log::info(self::$progressText . $this->getProgress());
         sleep(3);
         $this->updateProgress(60);
-        pm_Log::info(self::$progressText.$this->getProgress());
+        pm_Log::info(self::$progressText . $this->getProgress());
         pm_Log::info('Status after 60% progress: ' . $this->getStatus());
         sleep(3);
     }
 
     public function statusMessage()
     {
-        pm_Log::info('Start method statusMessage. ID: ' . $this->getId().' with status: '.$this->getStatus());
+        pm_Log::info('Start method statusMessage. ID: ' . $this->getId() . ' with status: ' . $this->getStatus());
         switch ($this->getStatus()) {
             case static::STATUS_QUEUE:
                 return pm_Locale::lmsg('taskProgressMessage');
@@ -46,7 +46,7 @@ class Modules_LongTasksExample_Task_Succeed extends pm_LongTask_Task
     public function onStart()
     {
         pm_Log::info('Start method onStart');
-        pm_Log::info('p1 is '.$this->getParam('p1'));
+        pm_Log::info('p1 is ' . $this->getParam('p1'));
         $this->setParam('onStart', 1);
     }
 
