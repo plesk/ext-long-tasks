@@ -9,13 +9,18 @@ class Modules_LongTasksExample_Task_Fail extends pm_LongTask_Task
     {
         pm_Log::info('Start method Run for Fail.');
         pm_Log::info('domain name is ' . $this->getParam('domainName', 'none'));
-        sleep(2);
-        $this->updateProgress(30);
-        sleep(2);
+        $duration = (int)$this->getParam('duration', 10);
+        $duration = ($duration <= 0) ? 1 : $duration;
+
+        $startTime = time();
+        $spend = 0;
+        while ($spend <= $duration) {
+            $this->updateProgress($spend / $duration * 100);
+            sleep(1);
+            $spend = (int)(time() - $startTime);
+        }
+
         throw new pm_Exception('ERROR error');
-        $this->updateProgress(60);
-        sleep(2);
-        $this->updateProgress(90);
     }
 
     public function statusMessage()

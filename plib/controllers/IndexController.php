@@ -2,7 +2,9 @@
 
 class IndexController extends pm_Controller_Action
 {
-    private $taskManager = NULL;
+    private $taskManager;
+    private $duration;
+    private $allowRedirectToDomain;
 
     public function init()
     {
@@ -11,6 +13,10 @@ class IndexController extends pm_Controller_Action
         if (is_null($this->taskManager)) {
             $this->taskManager = new pm_LongTask_Manager();
         }
+
+        $this->duration = (int)pm_Config::get('duration');
+        $this->allowRedirectToDomain = (bool)pm_Config::get('allowRedirectToDomain');
+
         // Init title for all actions
         $this->view->pageTitle = $this->lmsg('pageTitle', ['product' => 'Plesk']);
     }
@@ -103,13 +109,14 @@ class IndexController extends pm_Controller_Action
             'p2' => 2,
         ]);
         $task->setParam('p3', 3);
+        $task->setParam('duration', $this->duration);
 
         if (isset($domain)) {
             $task->setParam('domainName', $domain->getName());
         }
         $this->taskManager->start($task, $domain);
 
-        if ($domain) {
+        if ($this->allowRedirectToDomain && $domain) {
             $this->_redirect('/admin/subscription/overview/id/' . $domain->getId(), ['prependBase' => false]);
         } else {
             $this->_redirect('index/form');

@@ -12,19 +12,23 @@ class Modules_LongTasksExample_Task_Succeed extends pm_LongTask_Task
         pm_Log::info('p2 is ' . $this->getParam('p2'));
         pm_Log::info('p3 is ' . $this->getParam('p3'));
         pm_Log::info('domain name is ' . $this->getParam('domainName', 'none'));
-        $this->updateProgress(0);
-        pm_Log::info(self::$progressText . $this->getProgress());
-        sleep(3);
-        $this->updateProgress(20);
-        pm_Log::info(self::$progressText . $this->getProgress());
-        sleep(3);
-        $this->updateProgress(40);
-        pm_Log::info(self::$progressText . $this->getProgress());
-        sleep(3);
-        $this->updateProgress(60);
-        pm_Log::info(self::$progressText . $this->getProgress());
-        pm_Log::info('Status after 60% progress: ' . $this->getStatus());
-        sleep(3);
+
+        $duration = (int)$this->getParam('duration', 15);
+        $duration = ($duration <= 0) ? 1 : $duration;
+
+        $startTime = time();
+        $spend = 0;
+        while ($spend <= $duration) {
+            $this->updateProgress($spend / $duration * 100);
+
+            pm_Log::info(self::$progressText . $this->getProgress());
+            if ($spend % 10) {
+                pm_Log::info('Status after ' . $this->getProgress() . '% progress: ' . $this->getStatus());
+            }
+
+            sleep(1);
+            $spend = (int)(time() - $startTime);
+        }
     }
 
     public function statusMessage()
