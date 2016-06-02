@@ -109,11 +109,7 @@ class IndexController extends pm_Controller_Action
         }
         $this->taskManager->start($task, $domain);
 
-        if ($domain) {
-            $this->_redirect('/admin/subscription/overview/id/' . $domain->getId(), ['prependBase' => false]);
-        } else {
-            $this->_redirect('index/form');
-        }
+        $this->_redirect('index/form');
     }
 
     public function cancelDoneTaskAction()
