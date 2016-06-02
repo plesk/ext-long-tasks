@@ -4,17 +4,18 @@ class Modules_LongTasksExample_Task_Fail extends pm_LongTask_Task
 {
     const UID = 'fail';
     public $trackProgress = false;
+    private $sleep = 15;
 
     public function run()
     {
         pm_Log::info('Start method Run for Fail.');
         pm_Log::info('domain name is ' . $this->getParam('domainName', 'none'));
-        sleep(2);
+        sleep($this->sleep);
         $this->updateProgress(30);
-        sleep(2);
+        sleep($this->sleep);
         throw new pm_Exception('ERROR error');
         $this->updateProgress(60);
-        sleep(2);
+        sleep($this->sleep);
         $this->updateProgress(90);
     }
 
