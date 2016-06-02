@@ -4,6 +4,7 @@ class Modules_LongTasksExample_Task_Succeed extends pm_LongTask_Task
 {
     const UID = 'succeed';
     public $trackProgress = true;
+    private $sleep = 15;
     private static $progressText = 'Progress is ';
 
     public function run()
@@ -14,17 +15,17 @@ class Modules_LongTasksExample_Task_Succeed extends pm_LongTask_Task
         pm_Log::info('domain name is ' . $this->getParam('domainName', 'none'));
         $this->updateProgress(0);
         pm_Log::info(self::$progressText . $this->getProgress());
-        sleep(3);
+        sleep($this->sleep);
         $this->updateProgress(20);
         pm_Log::info(self::$progressText . $this->getProgress());
-        sleep(3);
+        sleep($this->sleep);
         $this->updateProgress(40);
         pm_Log::info(self::$progressText . $this->getProgress());
-        sleep(3);
+        sleep($this->sleep);
         $this->updateProgress(60);
         pm_Log::info(self::$progressText . $this->getProgress());
         pm_Log::info('Status after 60% progress: ' . $this->getStatus());
-        sleep(3);
+        sleep($this->sleep);
     }
 
     public function statusMessage()
