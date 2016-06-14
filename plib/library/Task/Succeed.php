@@ -32,7 +32,7 @@ class Modules_LongTasksExample_Task_Succeed extends pm_LongTask_Task
     {
         pm_Log::info('Start method statusMessage. ID: ' . $this->getId() . ' with status: ' . $this->getStatus());
         switch ($this->getStatus()) {
-            case static::STATUS_QUEUE:
+            case static::STATUS_RUNNING:
                 return pm_Locale::lmsg('taskProgressMessage');
             case static::STATUS_DONE:
                 return pm_Context::getPlibDir();
