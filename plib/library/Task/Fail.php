@@ -37,7 +37,7 @@ class Modules_LongTasksExample_Task_Fail extends pm_LongTask_Task
         return '';
     }
 
-    public function onError()
+    public function onError(Exception $e)
     {
         pm_Log::info('Start method onError');
         $this->setParam('onError', 1);
