@@ -31,8 +31,6 @@ class Modules_LongTasksExample_Task_Fail extends pm_LongTask_Task
                 return pm_Locale::lmsg('taskError', ['id' => $this->getId()]);
             case static::STATUS_NOT_STARTED:
                 return pm_Locale::lmsg('taskPingError', ['id' => $this->getId()]);
-            case static::STATUS_CANCELED:
-                return pm_Locale::lmsg('taskCancel', ['id' => $this->getId()]);
         }
         return '';
     }
