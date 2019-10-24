@@ -4,7 +4,7 @@ class Modules_LongTasksExample_Task_Fail extends pm_LongTask_Task
 {
     const UID = 'fail';
     public $trackProgress = false;
-    private $sleep = 15;
+    private $sleep = 5;
 
     public function run()
     {
