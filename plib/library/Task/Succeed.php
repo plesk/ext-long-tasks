@@ -4,7 +4,7 @@ class Modules_LongTasksExample_Task_Succeed extends pm_LongTask_Task
 {
     const UID = 'succeed';
     public $trackProgress = true;
-    private $sleep = 15;
+    private $sleep = 5;
     private static $progressText = 'Progress is ';
 
     public function run()
